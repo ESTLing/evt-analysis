@@ -39,7 +39,7 @@ def read_target_es():
 
 def clean():
     hostname = 'DESKTOP-LTOOKJH'
-    outfile = open(hostname+'.json', 'w')
+    outfile = open('intermediate/' + hostname+'.json', 'w')
     last_event = None
     for record in read_es(hostname):
         event = record['_source']

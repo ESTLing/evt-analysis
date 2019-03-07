@@ -1,4 +1,4 @@
-# 从原始数据中提取目标主机的所有日志
+# 从原始数据中提取目标主机的日志
 
 import json
 from datetime import datetime, timedelta, timezone
