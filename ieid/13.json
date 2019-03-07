@@ -1,0 +1,32 @@
+{
+    "_index": "winlogbeat5",
+    "_type": "doc",
+    "_id": "lncZfmcBnDdDOmlhnOYo",
+    "_score": 1,
+    "_source": {
+        "event_id": 13,
+        "source_name": "Microsoft-Windows-Sysmon",
+        "message": "Registry value set:\nRuleName: \nEventType: SetValue\nUtcTime: 2018-12-05 10:53:37.468\nProcessGuid: {5D6B4282-AE1E-5C07-0000-00105FD88C01}\nProcessId: 3708\nImage: C:\\Windows\\system32\\CompatTelRunner.exe\nTargetObject: \\REGISTRY\\A\\{9bb72413-b77d-e7d7-1219-6676387d5008}\\Root\\InventoryDeviceContainer\\{6d7d4d21-8843-f51e-86f4-3a5b1ad3c2e3}\\FriendlyName\nDetails: (Empty)",
+        "host": {
+            "name": "DESKTOP-LTOOKJH"
+        },
+        "log_name": "Microsoft-Windows-Sysmon/Operational",
+        "level": "信息",
+        "@timestamp": "2018-12-05T10:53:37.486Z",
+        "user": {
+            "name": "SYSTEM",
+            "identifier": "S-1-5-18",
+            "domain": "NT AUTHORITY",
+            "type": "Well Known Group"
+        },
+        "event_data": {
+            "UtcTime": "2018-12-05 10:53:37.468",
+            "ProcessGuid": "{5D6B4282-AE1E-5C07-0000-00105FD88C01}",
+            "Image": "C:\\Windows\\system32\\CompatTelRunner.exe",
+            "Details": "(Empty)",
+            "EventType": "SetValue",
+            "ProcessId": "3708",
+            "TargetObject": "\\REGISTRY\\A\\{9bb72413-b77d-e7d7-1219-6676387d5008}\\Root\\InventoryDeviceContainer\\{6d7d4d21-8843-f51e-86f4-3a5b1ad3c2e3}\\FriendlyName"
+        }
+    }
+}

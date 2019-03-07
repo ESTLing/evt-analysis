@@ -1,0 +1,41 @@
+{
+    "_index": "winlogbeat5",
+    "_type": "doc",
+    "_id": "MHcZfmcBnDdDOmlhjsLj",
+    "_score": 1,
+    "_source": {
+        "event_id": 4688,
+        "source_name": "Microsoft-Windows-Security-Auditing",
+        "message": "已创建新进程。\n\n创建者主题:\n\t安全 ID:\t\tS-1-5-18\n\t帐户名:\t\tDESKTOP-5NVMPM1$\n\t帐户域:\t\tXXAQ\n\t登录 ID:\t\t0x3E7\n\n目标主题:\n\t安全 ID:\t\tS-1-0-0\n\t帐户名:\t\tDESKTOP-5NVMPM1$\n\t帐户域:\t\tXXAQ\n\t登录 ID:\t\t0x3E4\n\n进程信息:\n\t新进程 ID:\t\t0x12c8\n\t新进程名称:\tC:\\Windows\\System32\\svchost.exe\n\t令牌提升类型:\t%%1936\n\t强制性标签:\t\tS-1-16-16384\n\t创建者进程 ID:\t0x2e8\n\t创建者进程名称:\tC:\\Windows\\System32\\services.exe\n\t进程命令行:\t\n\n“令牌提升类型”表示根据用户帐户控制策略分配给新进程的令牌类型。\n\n类型 1 是未删除特权或未禁用组的完全令牌。完全令牌仅在禁用了用户帐户控制或者用户是内置管理员帐户或服务帐户的情况下使用。\n\n类型 2 是未删除特权或未禁用组的提升令牌。当启用了用户帐户控制并且用户选择使用“以管理员身份运行”选项启动程序时，会使用提升令牌。当应用程序配置为始终需要管理特权或始终需要最高特权并且用户是管理员组的成员时，也会使用提升令牌。\n\n类型 3 是删除了管理特权并禁用了管理组的受限令牌。当启用了用户帐户控制，应用程序不需要管理特权并且用户未选择使用“以管理员身份运行”选项启动程序时，会使用受限令牌。",
+        "host": {
+            "name": "DESKTOP-5NVMPM1",
+            "os": {
+                "platform": "windows",
+                "version": "10.0",
+                "family": "windows",
+                "build": "17134.407"
+            },
+            "id": "8e5012d6-7dc8-4d9d-87f0-394ccae9bbea",
+            "architecture": "x86_64"
+        },
+        "log_name": "Security",
+        "level": "信息",
+        "@timestamp": "2018-12-03T04:22:35.337Z",
+        "event_data": {
+            "TargetUserName": "DESKTOP-5NVMPM1$",
+            "ParentProcessName": "C:\\Windows\\System32\\services.exe",
+            "SubjectUserSid": "S-1-5-18",
+            "SubjectDomainName": "XXAQ",
+            "MandatoryLabel": "S-1-16-16384",
+            "SubjectUserName": "DESKTOP-5NVMPM1$",
+            "NewProcessId": "0x12c8",
+            "NewProcessName": "C:\\Windows\\System32\\svchost.exe",
+            "TargetUserSid": "S-1-0-0",
+            "TargetLogonId": "0x3e4",
+            "TokenElevationType": "%%1936",
+            "SubjectLogonId": "0x3e7",
+            "ProcessId": "0x2e8",
+            "TargetDomainName": "XXAQ"
+        }
+    }
+}

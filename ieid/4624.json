@@ -1,0 +1,54 @@
+{
+    "_index": "winlogbeat5",
+    "_type": "doc",
+    "_id": "B3gdfmcBnDdDOmlhslvC",
+    "_score": 1,
+    "_source": {
+        "source_name": "Microsoft-Windows-Security-Auditing",
+        "host": {
+            "name": "LAPTOP-HKC69LO0",
+            "os": {
+                "platform": "windows",
+                "version": "10.0",
+                "family": "windows",
+                "build": "17134.407"
+            },
+            "id": "544b0f24-28db-4091-a3bd-1885b55117b8",
+            "architecture": "x86_64"
+        },
+        "log_name": "Security",
+        "event_data": {
+            "AuthenticationPackageName": "Negotiate",
+            "SubjectUserSid": "S-1-5-18",
+            "VirtualAccount": "%%1843",
+            "SubjectUserName": "LAPTOP-HKC69LO0$",
+            "ImpersonationLevel": "%%1833",
+            "ElevatedToken": "%%1842",
+            "TransmittedServices": "-",
+            "WorkstationName": "-",
+            "TargetOutboundUserName": "-",
+            "TargetOutboundDomainName": "-",
+            "TargetDomainName": "NT AUTHORITY",
+            "IpAddress": "-",
+            "LogonProcessName": "Advapi  ",
+            "TargetUserName": "SYSTEM",
+            "RestrictedAdminMode": "-",
+            "SubjectDomainName": "WORKGROUP",
+            "KeyLength": "0",
+            "ProcessName": "C:\\Windows\\System32\\services.exe",
+            "TargetLinkedLogonId": "0x0",
+            "TargetUserSid": "S-1-5-18",
+            "LogonType": "5",
+            "IpPort": "-",
+            "TargetLogonId": "0x3e7",
+            "SubjectLogonId": "0x3e7",
+            "ProcessId": "0x330",
+            "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+            "LmPackageName": "-"
+        },
+        "event_id": 4624,
+        "message": "已成功登录帐户。\n\n使用者:\n\t安全 ID:\t\tS-1-5-18\n\t帐户名称:\t\tLAPTOP-HKC69LO0$\n\t帐户域:\t\tWORKGROUP\n\t登录 ID:\t\t0x3E7\n\n登录信息:\n\t登录类型:\t\t5\n\t受限制的管理员模式:\t-\n\t虚拟帐户:\t\t否\n\t提升的令牌:\t\t是\n\n模拟级别:\t\t模拟\n\n新登录:\n\t安全 ID:\t\tS-1-5-18\n\t帐户名称:\t\tSYSTEM\n\t帐户域:\t\tNT AUTHORITY\n\t登录 ID:\t\t0x3E7\n\t链接的登录 ID:\t\t0x0\n\t网络帐户名称:\t-\n\t网络帐户域:\t-\n\t登录 GUID:\t\t{00000000-0000-0000-0000-000000000000}\n\n进程信息:\n\t进程 ID:\t\t0x330\n\t进程名称:\t\tC:\\Windows\\System32\\services.exe\n\n网络信息:\n\t工作站名称:\t-\n\t源网络地址:\t-\n\t源端口:\t\t-\n\n详细的身份验证信息:\n\t登录进程:\t\tAdvapi  \n\t身份验证数据包:\tNegotiate\n\t传递的服务:\t-\n\t数据包名(仅限 NTLM):\t-\n\t密钥长度:\t\t0\n\n创建登录会话时，将在被访问的计算机上生成此事件。\n\n“使用者”字段指示本地系统上请求登录的帐户。这通常是一个服务(例如 Server 服务)或本地进程(例如 Winlogon.exe 或 Services.exe)。\n\n“登录类型”字段指示发生的登录类型。最常见的类型是 2 (交互式)和 3 (网络)。\n\n“新登录”字段指示新登录是为哪个帐户创建的，即已登录的帐户。\n\n“网络”字段指示远程登录请求源自哪里。“工作站名称”并非始终可用，并且在某些情况下可能会留空。\n\n“模拟级别”字段指示登录会话中的进程可以模拟到的程度。\n\n“身份验证信息”字段提供有关此特定登录请求的详细信息。\n\t- “登录 GUID”是可用于将此事件与 KDC 事件关联起来的唯一标识符。\n\t-“传递的服务”指示哪些中间服务参与了此登录请求。\n\t-“数据包名”指示在 NTLM 协议中使用了哪些子协议。\n\t-“密钥长度”指示生成的会话密钥的长度。如果没有请求会话密钥，则此字段将为 0。",
+        "level": "信息",
+        "@timestamp": "2018-12-05T07:08:04.694Z"
+    }
+}

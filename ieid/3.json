@@ -1,0 +1,48 @@
+{
+    "_index": "winlogbeat5",
+    "_type": "doc",
+    "_id": "vXgZfmcBnDdDOmlhsQOj",
+    "_score": 1,
+    "_source": {
+        "event_id": 3,
+        "source_name": "Microsoft-Windows-Sysmon",
+        "message": "Network connection detected:\nRuleName: \nUtcTime: 2018-12-05 11:21:35.954\nProcessGuid: {8E5012D6-4CAC-5C07-0000-0010B9E81E00}\nProcessId: 12668\nImage: C:\\Users\\64177\\AppData\\Roaming\\baidu\\BaiduNetdisk\\baidunetdisk.exe\nUser: DESKTOP-5NVMPM1\\64177\nProtocol: tcp\nInitiated: true\nSourceIsIpv6: false\nSourceIp: 192.168.1.5\nSourceHostname: DESKTOP-5NVMPM1.xxaq.com\nSourcePort: 60560\nSourcePortName: \nDestinationIsIpv6: false\nDestinationIp: 119.75.222.122\nDestinationHostname: \nDestinationPort: 443\nDestinationPortName: https",
+        "host": {
+            "name": "DESKTOP-5NVMPM1",
+            "os": {
+                "platform": "windows",
+                "version": "10.0",
+                "family": "windows",
+                "build": "17134.407"
+            },
+            "id": "8e5012d6-7dc8-4d9d-87f0-394ccae9bbea",
+            "architecture": "x86_64"
+        },
+        "log_name": "Microsoft-Windows-Sysmon/Operational",
+        "level": "信息",
+        "@timestamp": "2018-12-05T11:21:38.530Z",
+        "user": {
+            "name": "SYSTEM",
+            "identifier": "S-1-5-18",
+            "domain": "NT AUTHORITY",
+            "type": "Well Known Group"
+        },
+        "event_data": {
+            "UtcTime": "2018-12-05 11:21:35.954",
+            "ProcessGuid": "{8E5012D6-4CAC-5C07-0000-0010B9E81E00}",
+            "DestinationIp": "119.75.222.122",
+            "Protocol": "tcp",
+            "Initiated": "true",
+            "SourcePort": "60560",
+            "User": "DESKTOP-5NVMPM1\\64177",
+            "DestinationPort": "443",
+            "SourceIp": "192.168.1.5",
+            "SourceIsIpv6": "false",
+            "Image": "C:\\Users\\64177\\AppData\\Roaming\\baidu\\BaiduNetdisk\\baidunetdisk.exe",
+            "DestinationIsIpv6": "false",
+            "SourceHostname": "DESKTOP-5NVMPM1.xxaq.com",
+            "DestinationPortName": "https",
+            "ProcessId": "12668"
+        }
+    }
+}
