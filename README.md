@@ -6,3 +6,9 @@ elasticdump --input=DESKTOP-LTOOKJH.json --output=http://127.0.0.1:9200/winlogbe
 ```
 elasticdump需要通过npm安装。
 
+# TODO
+- Deadline 3.14
+  - [ ] 收集事件的信息
+  - [ ] 进程行为简单分析
+  - [ ] 正则表达式处理日志
+  - [ ] 使用[bar图](https://www.echartsjs.com/examples/editor.html?c=bar-y-category-stack)可视化目标主机事件类型

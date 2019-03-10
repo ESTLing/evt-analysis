@@ -1,40 +1,9 @@
-# 从原始数据中提取目标主机的日志
+# 从指定时段提取日志
 
 import json
 from datetime import datetime, timedelta, timezone
 import elasticsearch
 from elasticsearch import helpers
-
-from event.parse_event import *
-from event.event_type import event_dict
-
-
-hostList = {}
-userLog = {}
-
-
-def read_all_event():
-    with open('../1224exp/winlogbeat1224.json') as infile:
-        for line in infile:
-            event = json.loads(line)['_source']
-            event_id = event['event_id']
-            source_name = event['source_name']
-            if event_id in event_dict and event_dict[event_id] == source_name:
-                yield event, event_id
-
-
-def preprocess_data():
-    for event, event_id in read_all_event():
-        func = 'deal_event_'+str(event_id)
-        hostname = event['host']['name']
-        if hostname not in hostList:
-            hostList[hostname] = {
-                'user': {},
-                'process': {}
-            }
-        eval(func)(event, hostList[hostname], userLog)
-    with open('rst.json', 'w') as outfile:
-        json.dump(userLog, outfile)
 
 
 def read_es(start_time, end_time):

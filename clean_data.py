@@ -1,7 +1,8 @@
+# 用于从原始的数据中提取目标主机的数据
 import json
 import elasticsearch
 from elasticsearch import helpers
-from parse import event_type
+
 
 def read_es(hostname):
     es = elasticsearch.Elasticsearch()
@@ -74,6 +75,8 @@ def test_time_order():
 
 
 def statis_id():
+    """ statis id from target host
+    """
     statis = {}
     for event in read_target_es():
         event_id = event['_source']['event_id']
