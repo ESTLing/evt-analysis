@@ -1,5 +1,6 @@
 # 用于从原始的数据中提取目标主机的数据
 import json
+import re
 import elasticsearch
 from elasticsearch import helpers
 
@@ -53,27 +54,6 @@ def clean():
     outfile.close()
 
 
-def test_time_order():
-    last_time = ''
-    es = elasticsearch.Elasticsearch()
-    for event in helpers.scan(es,
-        query={
-            'query': {
-                'match_all': {}
-            },
-            'sort': [
-                { '@timestamp': 'asc' }
-            ]
-        },
-        preserve_order=True,
-        index='winlogbeat_target'):
-        timestamp = event['_source']['@timestamp']
-        if last_time > timestamp:
-            print('Time order uncorrect')
-        else:
-            last_time = timestamp
-
-
 def statis_id():
     """ statis id from target host
     """
@@ -93,11 +73,29 @@ def statis_id():
         for _id in statis[key]:
             print(str(_id).ljust(20), statis[key][_id])
         
+        
+def load_regex(regex_file):
+    all_reg = []
+    with open(regex_file) as infile:
+        for line in infile:
+            if line[-1] == '\n':
+                line = line[:-1]
+            line = line.split('\t')
+            if len(line) != 4: continue
+            all_reg.append((line[2], line[3]))
+    return all_reg
+
+
+def format_path(pathname, reg_table):
+    for reg in reg_table:
+        pathname = re.sub(reg[0], reg[1], pathname, flags=re.I)
+    return pathname
 
 def extract_actions():
     process_actions = []
     process_id = {}
     isolate_event = 0
+    all_reg = load_regex('regex.txt')
     for event in read_target_es():
         event_id = event['_source']['event_id']
         source_name = event['_source']['source_name']
@@ -115,7 +113,7 @@ def extract_actions():
             if ppid not in process_id:
                 isolate_event += 1
                 continue
-            process_id[ppid]['actions'].append('CreateProcess:'+data['Image'])
+            process_id[ppid]['actions'].append('CreateProcess:'+format_path(data['Image'], all_reg))
         elif source_name == 'Microsoft-Windows-Sysmon' and event_id == 3:
             data = event['_source']['event_data']
             pid = data['ProcessId']
@@ -132,7 +130,7 @@ def extract_actions():
                 isolate_event += 1
                 continue
             process_id[pid]['actions'].append('FileCreate:' + \
-                                            data['TargetFilename'])
+                                            format_path(data['TargetFilename'], all_reg))
         elif source_name == 'Microsoft-Windows-Sysmon' and event_id == 12:
             data = event['_source']['event_data']
             pid = data['ProcessId']
@@ -140,7 +138,7 @@ def extract_actions():
                 isolate_event += 1
                 continue
             process_id[pid]['actions'].append(data['EventType'] + ':' + \
-                                            data['TargetObject'])
+                                            format_path(data['TargetObject'], all_reg))
         elif source_name == 'Microsoft-Windows-Sysmon' and event_id == 13:
             data = event['_source']['event_data']
             pid = data['ProcessId']
@@ -148,7 +146,7 @@ def extract_actions():
                 isolate_event += 1
                 continue
             process_id[pid]['actions'].append(data['EventType'] + ':' + \
-                                            data['TargetObject'])
+                                            format_path(data['TargetObject'], all_reg))
     print('Total processes count:', len(process_actions))
     print('isolate event count:', isolate_event)
     with open('intermediate/actions.json', 'w') as outfile:
