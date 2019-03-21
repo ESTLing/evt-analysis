@@ -1,0 +1,22 @@
+{
+    "source_name": "Microsoft-Windows-Security-Auditing",
+    "event_data": {
+        "ProcessName": "C:\\Windows\\WinSxS\\amd64_microsoft-windows-servicingstack_31bf3856ad364e35_6.3.9600.16384_none_fa1dc1539b4180d8\\TiWorker.exe",
+        "NewState": "52",
+        "ResourceManager": "{59D32E59-F216-11E8-ACBF-D779439E9ACA}",
+        "TransactionId": "{384E4677-F7B2-11E8-80C5-0C9D920FD1F0}",
+        "SubjectDomainName": "XXAQ",
+        "ProcessId": "0x1314",
+        "SubjectUserSid": "S-1-5-18",
+        "SubjectUserName": "WIN-CU7KT80AT3C$",
+        "SubjectLogonId": "0x3e7"
+    },
+    "host": {
+        "name": "WIN-CU7KT80AT3C"
+    },
+    "log_name": "Security",
+    "message": "事务的状态已更改。\n\n使用者:\n\t安全 ID:\t\tS-1-5-18\n\t帐户名称:\t\tWIN-CU7KT80AT3C$\n\t帐户域:\t\tXXAQ\n\t登录 ID:\t\t0x3E7\n\n事务信息:\n\tRM 事务 ID:\t{384E4677-F7B2-11E8-80C5-0C9D920FD1F0}\n\t新状态:\t\t52\n\t资源管理器:\t{59D32E59-F216-11E8-ACBF-D779439E9ACA}\n\n进程信息:\n\t进程 ID:\t\t0x1314\n\t进程名称:\t\tC:\\Windows\\WinSxS\\amd64_microsoft-windows-servicingstack_31bf3856ad364e35_6.3.9600.16384_none_fa1dc1539b4180d8\\TiWorker.exe",
+    "@timestamp": "2018-12-04T11:01:18.373Z",
+    "level": "信息",
+    "event_id": 4985
+}

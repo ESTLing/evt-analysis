@@ -1,0 +1,26 @@
+{
+    "source_name": "Microsoft-Windows-Security-Auditing",
+    "event_data": {
+        "Properties": "%%7688\n\t\t{1131f6aa-9c07-11d1-f79f-00c04fc2dcd2}\n\t{19195a5b-6da0-11d0-afd3-00c04fd930c9}",
+        "ObjectType": "%{19195a5b-6da0-11d0-afd3-00c04fd930c9}",
+        "AccessList": "%%7688\n\t\t\t\t",
+        "OperationType": "Object Access",
+        "AccessMask": "0x100",
+        "SubjectUserSid": "S-1-5-18",
+        "SubjectUserName": "WIN-CU7KT80AT3C$",
+        "SubjectLogonId": "0x1d728a",
+        "ObjectName": "%{df775939-4454-4a3e-ad22-d7d82b206e4d}",
+        "SubjectDomainName": "XXAQ",
+        "HandleId": "0x0",
+        "ObjectServer": "DS",
+        "AdditionalInfo": "-"
+    },
+    "host": {
+        "name": "WIN-CU7KT80AT3C"
+    },
+    "log_name": "Security",
+    "level": "信息",
+    "message": "在对象上已执行操作。\n\n使用者:\n\t安全 ID:\t\tS-1-5-18\n\t帐户名:\t\tWIN-CU7KT80AT3C$\n\t帐户域:\t\tXXAQ\n\t登录 ID:\t\t0x1D728A\n\n对象:\n\t对象服务器:\t\tDS\n\t对象类型:\t\t%{19195a5b-6da0-11d0-afd3-00c04fd930c9}\n\t对象名:\t\t%{df775939-4454-4a3e-ad22-d7d82b206e4d}\n\t句柄 ID:\t\t0x0\n\n操作:\n\t操作类型:\t\tObject Access\n\t访问:\t\t控制访问\n\t\t\t\t\n\t访问掩码:\t\t0x100\n\t属性:\t\t控制访问\n\t\t{1131f6aa-9c07-11d1-f79f-00c04fc2dcd2}\n\t{19195a5b-6da0-11d0-afd3-00c04fd930c9}\n\n\n附加信息:\n\t参数 1:\t\t-\n\t参数 2:\t\t",
+    "@timestamp": "2018-12-04T12:04:22.569Z",
+    "event_id": 4662
+}

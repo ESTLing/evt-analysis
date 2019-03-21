@@ -1,0 +1,26 @@
+{
+    "log_name": "Security",
+    "event_data": {
+        "SubjectLogonId": "0x3e7",
+        "PrivilegeList": "SeAssignPrimaryTokenPrivilege\n\t\t\tSeTcbPrivilege\n\t\t\tSeSecurityPrivilege\n\t\t\tSeTakeOwnershipPrivilege\n\t\t\tSeLoadDriverPrivilege\n\t\t\tSeBackupPrivilege\n\t\t\tSeRestorePrivilege\n\t\t\tSeDebugPrivilege\n\t\t\tSeAuditPrivilege\n\t\t\tSeSystemEnvironmentPrivilege\n\t\t\tSeImpersonatePrivilege\n\t\t\tSeDelegateSessionUserImpersonatePrivilege",
+        "SubjectDomainName": "NT AUTHORITY",
+        "SubjectUserName": "SYSTEM",
+        "SubjectUserSid": "S-1-5-18"
+    },
+    "event_id": 4672,
+    "source_name": "Microsoft-Windows-Security-Auditing",
+    "message": "为新登录分配了特殊权限。\n\n使用者:\n\t安全 ID:\t\tS-1-5-18\n\t帐户名:\t\tSYSTEM\n\t帐户域:\t\tNT AUTHORITY\n\t登录 ID:\t\t0x3E7\n\n特权:\t\tSeAssignPrimaryTokenPrivilege\n\t\t\tSeTcbPrivilege\n\t\t\tSeSecurityPrivilege\n\t\t\tSeTakeOwnershipPrivilege\n\t\t\tSeLoadDriverPrivilege\n\t\t\tSeBackupPrivilege\n\t\t\tSeRestorePrivilege\n\t\t\tSeDebugPrivilege\n\t\t\tSeAuditPrivilege\n\t\t\tSeSystemEnvironmentPrivilege\n\t\t\tSeImpersonatePrivilege\n\t\t\tSeDelegateSessionUserImpersonatePrivilege",
+    "level": "信息",
+    "@timestamp": "2018-12-09T14:18:41.059Z",
+    "host": {
+        "name": "DESKTOP-00C4SSF",
+        "id": "538e6a8b-7250-436a-88bd-80d588ad98a2",
+        "architecture": "x86_64",
+        "os": {
+            "build": "17134.407",
+            "family": "windows",
+            "platform": "windows",
+            "version": "10.0"
+        }
+    }
+}

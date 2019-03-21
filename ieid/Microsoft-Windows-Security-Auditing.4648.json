@@ -1,0 +1,35 @@
+{
+    "@timestamp": "2018-12-10T04:15:06.418Z",
+    "log_name": "Security",
+    "host": {
+        "architecture": "x86_64",
+        "name": "LAPTOP-HKC69LO0",
+        "os": {
+            "version": "10.0",
+            "platform": "windows",
+            "build": "17134.407",
+            "family": "windows"
+        },
+        "id": "544b0f24-28db-4091-a3bd-1885b55117b8"
+    },
+    "source_name": "Microsoft-Windows-Security-Auditing",
+    "message": "试图使用显式凭据登录。\n\n使用者:\n\t安全 ID:\t\tS-1-5-18\n\t帐户名:\t\tLAPTOP-HKC69LO0$\n\t帐户域:\t\tWORKGROUP\n\t登录 ID:\t\t0x3E7\n\t登录 GUID:\t\t{00000000-0000-0000-0000-000000000000}\n\n使用了哪个帐户的凭据:\n\t帐户名:\t\tADMIN\n\t帐户域:\t\tLAPTOP-HKC69LO0\n\t登录 GUID:\t\t{00000000-0000-0000-0000-000000000000}\n\n目标服务器:\n\t目标服务器名:\tlocalhost\n\t附加信息:\tlocalhost\n\n进程信息:\n\t进程 ID:\t\t0x720\n\t进程名:\t\tC:\\Windows\\System32\\svchost.exe\n\n网络信息:\n\t网络地址:\t127.0.0.1\n\t端口:\t\t\t0\n\n在进程尝试通过显式指定帐户的凭据来登录该帐户时生成此事件。这通常发生在批量类型的配置中(例如计划任务) 或者使用 RUNAS 命令时。",
+    "level": "信息",
+    "event_data": {
+        "TargetInfo": "localhost",
+        "TargetLogonGuid": "{00000000-0000-0000-0000-000000000000}",
+        "IpAddress": "127.0.0.1",
+        "ProcessId": "0x720",
+        "ProcessName": "C:\\Windows\\System32\\svchost.exe",
+        "TargetDomainName": "LAPTOP-HKC69LO0",
+        "SubjectUserName": "LAPTOP-HKC69LO0$",
+        "IpPort": "0",
+        "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+        "SubjectUserSid": "S-1-5-18",
+        "TargetServerName": "localhost",
+        "TargetUserName": "ADMIN",
+        "SubjectLogonId": "0x3e7",
+        "SubjectDomainName": "WORKGROUP"
+    },
+    "event_id": 4648
+}

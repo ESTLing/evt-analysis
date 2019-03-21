@@ -1,0 +1,16 @@
+{
+    "source_name": "Service Control Manager",
+    "event_data": {
+        "param1": "IP Helper",
+        "Binary": "6900700068006C0070007300760063002F0034000000",
+        "param2": "正在运行"
+    },
+    "host": {
+        "name": "WIN-CU7KT80AT3C"
+    },
+    "log_name": "System",
+    "message": "IP Helper 服务处于 正在运行 状态。",
+    "@timestamp": "2018-12-10T09:35:08.195Z",
+    "event_id": 7036,
+    "level": "信息"
+}

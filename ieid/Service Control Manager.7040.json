@@ -1,0 +1,23 @@
+{
+    "source_name": "Service Control Manager",
+    "user": {
+        "domain": "NT AUTHORITY",
+        "name": "SYSTEM",
+        "type": "User",
+        "identifier": "S-1-5-18"
+    },
+    "event_data": {
+        "param1": "Background Intelligent Transfer Service",
+        "param3": "自动启动",
+        "param4": "BITS",
+        "param2": "按需启动"
+    },
+    "host": {
+        "name": "WIN-CU7KT80AT3C"
+    },
+    "log_name": "System",
+    "message": "Background Intelligent Transfer Service 服务的启动类型从 按需启动 更改为 自动启动。",
+    "@timestamp": "2018-12-06T12:32:25.284Z",
+    "event_id": 7040,
+    "level": "信息"
+}

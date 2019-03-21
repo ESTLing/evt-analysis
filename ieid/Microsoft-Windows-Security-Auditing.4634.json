@@ -1,0 +1,18 @@
+{
+    "source_name": "Microsoft-Windows-Security-Auditing",
+    "event_data": {
+        "TargetUserSid": "S-1-5-18",
+        "TargetUserName": "WIN-CU7KT80AT3C$",
+        "LogonType": "3",
+        "TargetDomainName": "XXAQ",
+        "TargetLogonId": "0x3b609"
+    },
+    "host": {
+        "name": "WIN-CU7KT80AT3C"
+    },
+    "log_name": "Security",
+    "message": "已注销帐户。\n\n使用者:\n\t安全 ID:\t\tS-1-5-18\n\t帐户名:\t\tWIN-CU7KT80AT3C$\n\t帐户域:\t\tXXAQ\n\t登录 ID:\t\t0x3B609\n\n登录类型:\t\t\t3\n\n在登录会话被破坏时生成此事件。可以使用登录 ID 值将它和一个登录事件准确关联起来。在同一台计算机上重新启动的区间中，登录 ID 是唯一的。",
+    "@timestamp": "2018-12-04T10:50:04.553Z",
+    "event_id": 4634,
+    "level": "信息"
+}
