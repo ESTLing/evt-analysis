@@ -35,7 +35,7 @@ name-33,5143,Microsoft-Windows-Security-Auditing:Object Access:File Share,,Subje
 name-34,4945,Microsoft-Windows-Security-Auditing:Policy Change:MPSSVC Rule-Level Policy Change,,,Rule(Rule ID;Rule Name),A rule was listed when the Windows Firewall started.,
 name-35,4904,Microsoft-Windows-Security-Auditing:Policy Change:Audit Policy Change,Event Source(Source Name),Subject(Account Name;Account Domain);Process(Process ID;Process Name),,An attempt was made to register a security event source.,
 name-36*,8222,VSSAudit,,Source Computer;User Name;Process Image Name,,8222-vssaudit:Shadow copy has been created,该事件资料不足
-name-37,4905,Microsoft-Windows-Security-Auditing:Policy Change:Audit Policy Change,Event Source(Source Name),Subject(Account Name;Account Domain);Process(Process ID;Process Name),,An attempt was made to unregister a security event source.与4904关联
+name-37,4905,Microsoft-Windows-Security-Auditing:Policy Change:Audit Policy Change,Event Source(Source Name),Subject(Account Name;Account Domain);Process(Process ID;Process Name),,An attempt was made to unregister a security event source.,与4904关联
 name-38,,,,,,A user account was enabled.,
 name-39,,,,,,An attempt was made to reset an account's password.,
 name-40,,,,,,Application Crash,
