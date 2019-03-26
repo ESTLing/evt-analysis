@@ -1,41 +1,41 @@
 name,event id,event source,operation,source,destination,description,note
-name-1,4624,Microsoft-Windows-Security-Auditing:Logon/Logoff:Logon,LogonType,IpAddress:SubjectUserName,TargetDomainName:TargetUserName,An account was successfully logged on,"when a user unlocks computer, Windows creates a new logon session and immediately closes it"
-name-2,4634,Microsoft-Windows-Security-Auditing:Logon/Logoff:Logon,LogonType,,TargetDomainName:TargetUserName,An account was logged off.,"①TargetLogonId可以与4624中的关联②该事件为不可靠事件，可能因关机或断网等意外导致事件未被记录"
-name-3,4656,Microsoft-Windows-Security-Auditing:Object Access:,,,,A handle to an object was requested,"未找到记录"
-name-4,5140,Microsoft-Windows-Security-Auditing:Object Access:File Share,,,,A network share object was accessed,
-name-5,4769,Microsoft-Windows-Security-Auditing:Account Logon:Kerberos Service Ticket Operations,,,,A Kerberos service ticket was requested,
-name-6,4688,Microsoft-Windows-Security-Auditing:Process Tracking:Process Creation,,SubjectDomainName:SubjectUserName:ParentProcessName:ProcessId,NewProcessName:NewProcessId,A new process has been created.,"sysmon中有对应事件，多记录了一项命令行参数"
-name-7,4658,Microsoft-Windows-Security-Auditing:Object Access:,,,,The handle to an object was closed,
-name-8,4768,Microsoft-Windows-Security-Auditing:Account Logon:Kerberos Authentication Service,,,,A Kerberos authentication ticket (TGT) was requested,
-name-9,4672,Microsoft-Windows-Security-Auditing:Logon/Logoff:Special Logon,PrivilegeList,SubjectDomainName:SubjectUserName,,Special privileges assigned to new logon.,
-name-10,4933,Microsoft-Windows-Security-Auditing:Directory Service:Directory Service Replication,,,,Synchronization of a replica of an Active Directory naming context has ended.,"Directory Service replication has little to no security relevance"
-name-11,4932,Microsoft-Windows-Security-Auditing:Directory Service:Directory Service Replication,,,,Synchronization of a replica of an Active Directory naming context has begun.,
-name-12,4663,Microsoft-Windows-Security-Auditing:Object Access:,,,,An attempt was made to access an object,
-name-13,4659,Microsoft-Windows-Security-Auditing:Object Access:,,,,A handle to an object was requested with intent to delete,
-name-14,4770,Microsoft-Windows-Security-Auditing:Account Logon:Kerberos Service Ticket Operations,,,,A Kerberos service ticket was renewed,
-name-15,4776,Microsoft-Windows-Security-Auditing:Account Logon:Credential Validation,,,,The domain controller attempted to validate the credentials for an account,
-name-16,4664,Microsoft-Windows-Security-Auditing:Object Access:File System,,,,An attempt was made to create a hard link.,
-name-17,4907,Microsoft-Windows-Security-Auditing:Policy Change:Audit Policy Change,,,,Auditing settings on object were changed.,
-name-18,4931,Microsoft-Windows-Security-Auditing:Directory Service:Detailed Directory Service Replication,,,,An Active Directory replica destination naming context was modified.,
-name-19,7036,Service Control Manager,,,,EVENT_SERVICE_STATUS_SUCCESS,
-name-20,7040,Service Control Manager,,,,Service start type changed,
-name-21,4662,Microsoft-Windows-Security-Auditing:Directory Service:Directory Service Access,,,,An operation was performed on an object,
-name-22,4648,Microsoft-Windows-Security-Auditing:Logon/Logoff:Logon,,,,A logon was attempted using explicit credentials.,
-name-23*,5722,NETLOGON,,,,Netlogon Server auth failed,
-name-24,4690,Microsoft-Windows-Security-Auditing:Object Access:Handle Manipulation,,,,An attempt was made to duplicate a handle to an object.,
-name-25,4985,Microsoft-Windows-Security-Auditing:Object Access:File System,,,,The state of a transaction has changed,
+name-1,4624,Microsoft-Windows-Security-Auditing:Logon/Logoff:Logon,Logon Type,Subject(Account Name;Account Domain),New Logon(Account Name;Account Domain),An account was successfully logged on,"用户解锁屏幕时会产生一个临时的logon session"
+name-2,4634,Microsoft-Windows-Security-Auditing:Logon/Logoff:Logon,Logon Type,Subject(Account Name;Account Domain),,An account was logged off.,"①TargetLogonId可以与4624中的关联②该事件为不可靠事件，可能因关机或断网等意外导致事件未被记录"
+name-3,4656,Microsoft-Windows-Security-Auditing:Object Access:,,Subject(Account Name;Account Domain);Process Information,Object(Object Name),A handle to an object was requested,"应用访问object时被记录的第一个事件，产生handle ID，可以用来关联4658，4663;operation为空说明类型由id唯一决定"
+name-4,5140,Microsoft-Windows-Security-Auditing:Object Access:File Share,,Subject,Network Information(Source Address;Source Port);Share Name,A network share object was accessed,
+name-5,4769,Microsoft-Windows-Security-Auditing:Account Logon:Kerberos Service Ticket Operations,,Account Information;Network Information,Service Information,A Kerberos service ticket was requested,该事件记录在被访问的主机上
+name-6,4688,Microsoft-Windows-Security-Auditing:Process Tracking:Process Creation,,Creator Subject(Account Name;Account Domain),Target Subject(Account Name;Account Domain),A new process has been created.,"sysmon中有对应事件，多记录了一项命令行参数"
+name-7,4658,Microsoft-Windows-Security-Auditing:Object Access:,,Subject(Account Name;Account Domain);Process Information,Object(Handle ID),The handle to an object was closed,
+name-8,4768,Microsoft-Windows-Security-Auditing:Account Logon:Kerberos Authentication Service,,Network Information(Account Name),,A Kerberos authentication ticket (TGT) was requested,
+name-9,4672,Microsoft-Windows-Security-Auditing:Logon/Logoff:Special Logon,Privileges,Subject(Account Name;Account Domain),,Special privileges assigned to new logon.,
+name-10,4933,Microsoft-Windows-Security-Auditing:Directory Service:Directory Service Replication,,Destination DRA,Source DRA,Synchronization of a replica of an Active Directory naming context has ended.,"Directory Service replication has little to no security relevance"
+name-11,4932,Microsoft-Windows-Security-Auditing:Directory Service:Directory Service Replication,,Destination DRA,Source DRA,Synchronization of a replica of an Active Directory naming context has begun.,
+name-12,4663,Microsoft-Windows-Security-Auditing:Object Access:,Access Request Information(Accesses),Subject,Object(Object Type;Object Name),An attempt was made to access an object," (Open 4656, Access 4663, Close 4658)"
+name-13,4659,Microsoft-Windows-Security-Auditing:Object Access:,,Subject(Account Name;Account Domain);Process Information,Object(Object Name),A handle to an object was requested with intent to delete,4656的特例
+name-14,4770,Microsoft-Windows-Security-Auditing:Account Logon:Kerberos Service Ticket Operations,,Account Information;Network Information,Service Information,A Kerberos service ticket was renewed,
+name-15,4776,Microsoft-Windows-Security-Auditing:Account Logon:Credential Validation,,Logon Account;Source Workstation,,The domain controller attempted to validate the credentials for an account,
+name-16,4664,Microsoft-Windows-Security-Auditing:Object Access:File System,,Subject(Account Name;Account Domain),Link Information(File Name;Link Name),An attempt was made to create a hard link.,
+name-17,4907,Microsoft-Windows-Security-Auditing:Policy Change:Audit Policy Change,,Subject(Account Name;Account Domain);Process Information(Process Information;Process Name),Object(Object Type;Object Name),Auditing settings on object were changed.,
+name-18,4931,Microsoft-Windows-Security-Auditing:Directory Service:Detailed Directory Service Replication,,Destination DRA,Source DRA,An Active Directory replica destination naming context was modified.,
+name-19*,7036,Service Control Manager,EVENT_SERVICE_STATUS_SUCCESS,,,EVENT_SERVICE_STATUS_SUCCESS,Service Control Manager给service发送控制信息，具体信息以param*的方式保存在事件中
+name-20*,7040,Service Control Manager,EVENT_SERVICE_START_TYPE_CHANGED,,,Service start type changed,同7040
+name-21,4662,Microsoft-Windows-Security-Auditing:Directory Service:Directory Service Access,,Subject(Account Name;Account Domain),Object(Object Type;Object Name),An operation was performed on an object,
+name-22,4648,Microsoft-Windows-Security-Auditing:Logon/Logoff:Logon,,Subject(Account Name;Account Domain),Target Server(Target Server Name),A logon was attempted using explicit credentials.,"被使用凭证的账户信息和登陆的进程也被记录了"
+name-23,5722,NETLOGON,,Computer,,Netlogon Server auth failed,"出现的场景:计算机通过DC更新账户密码;账户名冲突;账户被reset"
+name-24,4690,Microsoft-Windows-Security-Auditing:Object Access:Handle Manipulation,,Subject,Source Handle Information;New Handle Information,An attempt was made to duplicate a handle to an object.,
+name-25,4985,Microsoft-Windows-Security-Auditing:Object Access:File System,,Subject,Process Information,The state of a transaction has changed,"暂时未清楚该事件描述的是什么"
 name-26,900,Trend Micro OfficeScan Server,,,,900-trend micro officescan,"日本公司Trend Micro的防毒软件"
-name-27,4742,Microsoft-Windows-Security-Auditing:Account Management:Computer Account Management,,,,A computer account was changed,
-name-28,4660,Microsoft-Windows-Security-Auditing:Object Access:,,,,An object was deleted,
-name-29,5447,Microsoft-Windows-Security-Auditing:Policy Change:Other Policy Change Events,,,,A Windows Filtering Platform filter has been changed.,
-name-30,4740,Microsoft-Windows-Security-Auditing:Account Management:User Account Management,,,,A user account was locked out.,
-name-31,4738,Microsoft-Windows-Security-Auditing:Account Management:User Account Management,,,,A user account was changed,
-name-32,5136,Microsoft-Windows-Security-Auditing:Directory Service:Directory Service Changes,,,,A directory service object was modified.,
-name-33,5143,Microsoft-Windows-Security-Auditing:Object Access:File Share,,,,A network share object was modified.,
-name-34,4945,Microsoft-Windows-Security-Auditing:Policy Change:MPSSVC Rule-Level Policy Change,,,,A rule was listed when the Windows Firewall started.,
-name-35,4904,Microsoft-Windows-Security-Auditing:Policy Change:Audit Policy Change,,,,An attempt was made to register a security event source.,
-name-36,8222,VSSAudit,,,,8222-vssaudit,
-name-37,4905,Microsoft-Windows-Security-Auditing:Policy Change:Audit Policy Change,,,,An attempt was made to unregister a security event source.,
+name-27,4742,Microsoft-Windows-Security-Auditing:Account Management:Computer Account Management,,Subject(Account Name;Account Domain),Computer Account That Was Changed(Account Name;Account Domain),A computer account was changed,"计算机账户就是以$结尾的账户,更改的具体信息记录在Attributes中"
+name-28,4660,Microsoft-Windows-Security-Auditing:Object Access:,,Subject;Process Information,Object(Handle ID),An object was deleted,"与4663的作用重复，为4663的子集"
+name-29,5447,Microsoft-Windows-Security-Auditing:Policy Change:Other Policy Change Events,Change Information(Change Type),Subject;Process Information,Layer Information(Name),A Windows Filtering Platform filter has been changed.,
+name-30,4740,Microsoft-Windows-Security-Auditing:Account Management:User Account Management,,Subject(Account Name;Account Domain),Account That Was Locked Out(Account Name;Account Domain),A user account was locked out.,"subject字段永远是system账户"
+name-31,4738,Microsoft-Windows-Security-Auditing:Account Management:User Account Management,,Subject(Account Name;Account Domain),Target Account(Account Name;Account Domain),A user account was changed,"更改类型需要看Attributes字段是怎么变的"
+name-32,5136,Microsoft-Windows-Security-Auditing:Directory Service:Directory Service Changes,Operation(Type),Subject(Account Name;Account Domain),Object(DN),A directory service object was modified.,
+name-33,5143,Microsoft-Windows-Security-Auditing:Object Access:File Share,,Subject,Share Information(Share Name),A network share object was modified.,Share Information里记录了修改前和修改后的值
+name-34,4945,Microsoft-Windows-Security-Auditing:Policy Change:MPSSVC Rule-Level Policy Change,,,Rule(Rule ID;Rule Name),A rule was listed when the Windows Firewall started.,
+name-35,4904,Microsoft-Windows-Security-Auditing:Policy Change:Audit Policy Change,Event Source(Source Name),Subject(Account Name;Account Domain);Process(Process ID;Process Name),,An attempt was made to register a security event source.,
+name-36*,8222,VSSAudit,,Source Computer;User Name;Process Image Name,,8222-vssaudit:Shadow copy has been created,该事件资料不足
+name-37,4905,Microsoft-Windows-Security-Auditing:Policy Change:Audit Policy Change,Event Source(Source Name),Subject(Account Name;Account Domain);Process(Process ID;Process Name),,An attempt was made to unregister a security event source.与4904关联
 name-38,,,,,,A user account was enabled.,
 name-39,,,,,,An attempt was made to reset an account's password.,
 name-40,,,,,,Application Crash,
