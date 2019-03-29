@@ -2,15 +2,21 @@
 ## 字段说明
 - name: 原json文件中的字段
 - event id: 事件ID
-- event source: [事件源](###事件源)
-- operation: 事件操作的[类型](###操作类型)
-- source: 产生行为的[主体](###主体)
-- destination: 作为行为对象的[客体](###客体)
+- event source: [事件源](#事件源)
+- operation: 事件操作的[类型](#操作类型)
+- source: 产生行为的[主体](#主体)
+- destination: 作为行为对象的[客体](#客体)
 - description: 原json文件中的字段，用于查找事件的唯一可靠依据
-- note: [额外说明](###额外说明)
+- note: [额外说明](#额外说明)
 
 ### 事件源
-Microsoft-Windows-Security-Auditing是比较特殊的一种事件源，其事件可以划分为两级的sub-category
+Microsoft-Windows-Security-Auditing是比较特殊的一种事件源，其事件可以划分为两级的sub-category,在[这里](https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/)可以查到其对应category。
+
+比如下图的是登录事件的页面，注意右表，有category一行。
+
+![](ultimatesecurity.png)
+
+同一category里的事件有很大可能存在关联。
 
 ### 操作类型
 某些事件代表一类行为，暂且定义操作类型是用来区分不同行为的。
