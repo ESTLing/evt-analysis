@@ -3,8 +3,9 @@
 # Edit at https://www.gitignore.io/?templates=python,visualstudiocode
 
 ### Project related ###
-winlogbeat1224.json
 intermediate/
+siemens_data/
+evtx-data/
 
 ### Python ###
 # Byte-compiled / optimized / DLL files

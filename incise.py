@@ -29,7 +29,7 @@ def read_es(start_time, end_time):
             ]
         },
         preserve_order=True,
-        index='winlogbeat')
+        index='syslog*')
 
 
 def statis_host():
@@ -59,27 +59,51 @@ def incise_data(start_time, end_time):
     last_event = {}
     for event in read_es(utc_start_time, utc_end_time):
         event = event['_source']
-        if 'host' not in event:
-            print('No host field')
+        # if 'host' not in event:
+        #     print('No host field')
         # elif event['host']['name'] != 'WIN-CU7KT80AT3C':
-        elif event['host']['name'] != 'DESKTOP-LTOOKJH':
+        # elif event['host']['name'] != 'DESKTOP-LTOOKJH':
             # print('log from host: %s' % event['host']['name'])
-            continue
-        else:
-            if last_event \
-                and last_event['@timestamp'] == event['@timestamp']\
-                and last_event['event_id'] == event['event_id']\
-                and last_event['event_data'] == event['event_data']:
-                print(last_event['@timestamp'])
-                continue
-            last_event = event
-            event_list.append(event)
+            # continue
+        # else:
+            # if last_event \
+            #     and last_event['@timestamp'] == event['@timestamp']\
+            #     and last_event['event_id'] == event['event_id']\
+            #     and last_event['event_data'] == event['event_data']:
+            #     print(last_event['@timestamp'])
+            #     continue
+            # last_event = event
+        event_list.append(event)
     print(len(event_list))
     with open(start_time.strftime('%m%d%H%M') + '-'
         + end_time.strftime('%m%d%H%M') + '.json', 'w') as o:
-        json.dump(event_list, o, ensure_ascii=False)
+        json.dump(event_list, o, ensure_ascii=False, indent=4)
+
+
+def statis_event_id():
+    statis = {}
+    es = elasticsearch.Elasticsearch()
+    for event in helpers.scan(es, query={ 'query': { 'match_all': {} } }, index='syslog*'):
+        event = event['_source']
+        if 'source_name' not in event: continue
+        if 'eventId' not in event: continue
+        key = event['source_name'] + ';' + str(event['eventId'])
+        if key in statis:
+            statis[key] += 1
+        else:
+            statis[key] = 1
+    count = 0
+    for r in statis:
+        count += statis[r]
+    print('Different kind of event: ', len(statis))
+    print('Total event count: ', count)
+    print('source name'.ljust(60), 'event ID'.ljust(10), 'count')
+    for r in sorted(statis, key=statis.get, reverse=True):
+        key = r.split(';')
+        print(key[0].ljust(60), key[1].ljust(10), statis[r])
 
 
 if __name__ == "__main__":
     # statis_host()
-    incise_data(datetime(2018, 12, 12, 20, 35), datetime(2018, 12, 12, 20, 40))
+    # incise_data(datetime(2019, 3, 14, 15, 2), datetime(2019, 3, 14, 15, 8))
+    statis_event_id()

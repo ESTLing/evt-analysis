@@ -36,7 +36,7 @@ def read_target_es():
             ]
         },
         preserve_order=True,
-        index='winlogbeat_target')
+        index='winlogbeat*')
 
 
 def clean():
@@ -153,4 +153,4 @@ def extract_actions():
         json.dump(process_actions, outfile, ensure_ascii=False)
 
 if __name__ == "__main__":
-    extract_actions()
+    statis_id()
