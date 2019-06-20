@@ -1,0 +1,47 @@
+{
+    "Event": {
+        "EventData": {
+            "AccessList": "%%1538\r\n\t\t\t\t%%1541\r\n\t\t\t\t%%4416\r\n\t\t\t\t%%4419\r\n\t\t\t\t%%4423\r\n\t\t\t\t",
+            "AccessMask": "0x120089",
+            "AccessReason": "%%1538:\t%%1801\tD:(A;;0x1200a9;;;BU)\r\n\t\t\t\t%%1541:\t%%1801\tD:(A;;0x1200a9;;;BU)\r\n\t\t\t\t%%4416:\t%%1801\tD:(A;;0x1200a9;;;BU)\r\n\t\t\t\t%%4419:\t%%1801\tD:(A;;0x1200a9;;;BU)\r\n\t\t\t\t%%4423:\t%%1801\tD:(A;;0x1200a9;;;BU)\r\n\t\t\t\t",
+            "HandleId": "0x00000630",
+            "ObjectName": "C:\\Windows\\WinSxS\\FileMaps\\program_files_common_files_microsoft_shared_ink_cs-cz_8649306c1fc0326e.cdf-ms",
+            "ObjectServer": "Security",
+            "ObjectType": "File",
+            "PrivilegeList": "-",
+            "ProcessId": "0x00001128",
+            "ProcessName": "C:\\Windows\\System32\\svchost.exe",
+            "ResourceAttributes": "-",
+            "RestrictedSidCount": "0",
+            "SubjectDomainName": "MYSELF",
+            "SubjectLogonId": "0x000003e4",
+            "SubjectUserName": "KAILING$",
+            "SubjectUserSid": "S-1-5-20",
+            "TransactionId": "00000000-0000-0000-0000-000000000000"
+        },
+        "System": {
+            "Channel": "Security",
+            "Computer": "KaiLing",
+            "Correlation": {},
+            "EventID": "4656",
+            "EventRecordID": "2887481",
+            "Execution": {
+                "ProcessID": "4",
+                "ThreadID": "220"
+            },
+            "Keywords": "0x8020000000000000",
+            "Level": "0",
+            "Opcode": "0",
+            "Provider": {
+                "Guid": "54849625-5478-4994-A5BA-3E3B0328C30D",
+                "Name": "Microsoft-Windows-Security-Auditing"
+            },
+            "Security": {},
+            "Task": "12800",
+            "TimeCreated": {
+                "SystemTime": "2019-06-18T04:30:01Z"
+            },
+            "Version": "1"
+        }
+    }
+}
