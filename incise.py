@@ -80,30 +80,6 @@ def incise_data(start_time, end_time):
         json.dump(event_list, o, ensure_ascii=False, indent=4)
 
 
-def statis_event_id():
-    statis = {}
-    es = elasticsearch.Elasticsearch()
-    for event in helpers.scan(es, query={ 'query': { 'match_all': {} } }, index='syslog*'):
-        event = event['_source']
-        if 'source_name' not in event: continue
-        if 'eventId' not in event: continue
-        key = event['source_name'] + ';' + str(event['eventId'])
-        if key in statis:
-            statis[key] += 1
-        else:
-            statis[key] = 1
-    count = 0
-    for r in statis:
-        count += statis[r]
-    print('Different kind of event: ', len(statis))
-    print('Total event count: ', count)
-    print('source name'.ljust(60), 'event ID'.ljust(10), 'count')
-    for r in sorted(statis, key=statis.get, reverse=True):
-        key = r.split(';')
-        print(key[0].ljust(60), key[1].ljust(10), statis[r])
-
-
 if __name__ == "__main__":
     # statis_host()
-    # incise_data(datetime(2019, 3, 14, 15, 2), datetime(2019, 3, 14, 15, 8))
-    statis_event_id()
+    incise_data(datetime(2019, 3, 14, 15, 2), datetime(2019, 3, 14, 15, 8))

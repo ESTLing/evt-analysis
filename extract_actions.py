@@ -1,4 +1,4 @@
-# 用于从原始的数据中提取目标主机的数据
+# 用于从原始的数据中提取目标process的action list
 import json
 import re
 import elasticsearch

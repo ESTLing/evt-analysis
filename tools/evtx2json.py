@@ -77,18 +77,40 @@ def evtx2json(evtxfile, jsonfile):
 def evtx2json_cmd(evtxfile, jsonfile):
     ''' Convert evtx format file into json format using evtx cmd tool
     '''
+    logstart, logend = logRanger(jsonfile)
+    if(logstart is None):
+        print('%s: Create new file' % jsonfile)
+    else:
+        print('%s:[ %s , %s ]' % (jsonfile, logstart, logend))
     evtxdump = '~/go/bin/evtxdump'
-    cmd = evtxdump + ' -c ' + evtxfile
-    with open(jsonfile, 'w') as outfile:
+    cmd = evtxdump + ' -c -t ' + evtxfile
+    cmd += '| sort -t: -k1 '
+    cmd += '| awk \'{ print substr($0,index($0,":")+2) }\' '
+    _logend = None
+    with open(jsonfile, 'a') as outfile:
         try:
-            subprocess.run(cmd, shell=True, stdout=outfile, check=True)
+            proc = subprocess.run(cmd, shell=True, stdout=subprocess.PIPE, encoding='utf-8')
+            for line in proc.stdout.split('\n'):
+                # empty line reached, means all output are parsed
+                if(not line): continue
+                event = json.loads(line)
+                _logend = event['Event']['System']['TimeCreated']['SystemTime']
+                if(logend is None or _logend > logend):
+                    outfile.write(line)
+                    outfile.write('\n')
         except subprocess.SubprocessError:
             print(cmd)
+    print('New End Time: %s\n' % _logend)
 
 
 def evtxDir(folder, result):
     ''' Iterate directory, process every evtx file and store result
     '''
+    if(not os.path.exists(result)):
+        os.mkdir(result)
+    if(not os.path.isdir(result)):
+        print('%s is not a valid directory.' % result)
+        exit(1)
     userlist = os.listdir(folder)
     for user in userlist:
         target_path = os.path.join(result, user)
@@ -103,6 +125,24 @@ def evtxDir(folder, result):
             log = log.split('.')[0] + '.json'
             dst_file = os.path.join(target_path, log)
             evtx2json_cmd(src_file, dst_file)
+
+
+def logRanger(jsonfile):
+    ''' return start time and end time of log file
+    '''
+    startTime = None
+    endTime = None
+    if(os.path.isfile(jsonfile)):
+        with open(jsonfile) as infile:
+            for line in infile:
+                try:
+                    event = json.loads(line)
+                    if startTime is None:
+                        startTime = event['Event']['System']['TimeCreated']['SystemTime']
+                    endTime = event['Event']['System']['TimeCreated']['SystemTime']
+                except:
+                    pass
+    return startTime, endTime
 
 
 if __name__ == '__main__':
