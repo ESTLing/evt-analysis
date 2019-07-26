@@ -36,6 +36,18 @@ def filterField(iter_event, field, vlist):
             yield event
 
 
+def statisEvent(iter_event):
+    ''' Count based on event ID
+    '''
+    cnt = {}
+    for event in iter_event:
+        eventID = event['Event']['System']['EventID']
+        cnt[eventID] = cnt.get(eventID, 0) + 1
+    print("Event ID Statistics:")
+    for key in sorted(cnt, key=cnt.get, reverse=True):
+        print(key.ljust(40), cnt[key])
+
+
 def listEvent(iter_event, field=None):
     for event in iter_event:
         event_data = event['Event']['EventData']
@@ -79,6 +91,8 @@ if __name__ == "__main__":
     iter_event = loadEvent(args.dst_file)
     if(args.fid):
         iter_event = filterEvent(iter_event, args.fid)
+    else:
+        statisEvent(iter_event)
     if(args.ffield):
         ffield = args.ffield.split(':')
         iter_event = filterField(iter_event, ffield[0], ffield[1].split(','))

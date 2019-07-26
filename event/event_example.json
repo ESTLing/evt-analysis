@@ -1,0 +1,119 @@
+{
+    "Event": {
+        "EventData": {
+            "AccessList": "%%4416\r\n\t\t\t\t",
+            "AccessMask": "0x0001",
+            "HandleId": "0x00000068",
+            "ObjectName": "C:\\Users\\debuger\\AppData\\Local\\Temp",
+            "ObjectServer": "Security",
+            "ObjectType": "File",
+            "ProcessId": "0x00000a08",
+            "ProcessName": "C:\\Windows\\System32\\mmc.exe",
+            "SubjectDomainName": "debuger-PC",
+            "SubjectLogonId": "0x0000ffa9",
+            "SubjectUserName": "debuger",
+            "SubjectUserSid": "S-1-5-21-122755304-1561331055-3695563850-1001"
+        },
+        "System": {
+            "Channel": "Security",
+            "Computer": "debuger-PC",
+            "Correlation": {},
+            "EventID": "4663",
+            "EventRecordID": "1471998",
+            "Execution": {
+                "ProcessID": "4",
+                "ThreadID": "68"
+            },
+            "Keywords": "0x8020000000000000",
+            "Level": "0",
+            "Opcode": "0",
+            "Provider": {
+                "Guid": "54849625-5478-4994-A5BA-3E3B0328C30D",
+                "Name": "Microsoft-Windows-Security-Auditing"
+            },
+            "Security": {},
+            "Task": "12800",
+            "TimeCreated": {
+                "SystemTime": "2019-06-29T01:20:58Z"
+            },
+            "Version": "0"
+        }
+    }
+}
+
+{
+    "Event": {
+        "EventData": {
+            "NewProcessId": "0x00000960",
+            "NewProcessName": "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe",
+            "ProcessId": "0x00000418",
+            "SubjectDomainName": "debuger-PC",
+            "SubjectLogonId": "0x0000ffec",
+            "SubjectUserName": "debuger",
+            "SubjectUserSid": "S-1-5-21-122755304-1561331055-3695563850-1001",
+            "TokenElevationType": "%%1938"
+        },
+        "System": {
+            "Channel": "Security",
+            "Computer": "debuger-PC",
+            "Correlation": {},
+            "EventID": "4688",
+            "EventRecordID": "1472006",
+            "Execution": {
+                "ProcessID": "4",
+                "ThreadID": "48"
+            },
+            "Keywords": "0x8020000000000000",
+            "Level": "0",
+            "Opcode": "0",
+            "Provider": {
+                "Guid": "54849625-5478-4994-A5BA-3E3B0328C30D",
+                "Name": "Microsoft-Windows-Security-Auditing"
+            },
+            "Security": {},
+            "Task": "13312",
+            "TimeCreated": {
+                "SystemTime": "2019-06-29T01:21:03Z"
+            },
+            "Version": "0"
+        }
+    }
+}
+
+{
+    "Event": {
+        "EventData": {
+            "ProcessId": "0x00000a08",
+            "ProcessName": "C:\\Windows\\System32\\mmc.exe",
+            "Status": "0x0000",
+            "SubjectDomainName": "debuger-PC",
+            "SubjectLogonId": "0x0000ffa9",
+            "SubjectUserName": "debuger",
+            "SubjectUserSid": "S-1-5-21-122755304-1561331055-3695563850-1001"
+        },
+        "System": {
+            "Channel": "Security",
+            "Computer": "debuger-PC",
+            "Correlation": {},
+            "EventID": "4689",
+            "EventRecordID": "1471999",
+            "Execution": {
+                "ProcessID": "4",
+                "ThreadID": "68"
+            },
+            "Keywords": "0x8020000000000000",
+            "Level": "0",
+            "Opcode": "0",
+            "Provider": {
+                "Guid": "54849625-5478-4994-A5BA-3E3B0328C30D",
+                "Name": "Microsoft-Windows-Security-Auditing"
+            },
+            "Security": {},
+            "Task": "13313",
+            "TimeCreated": {
+                "SystemTime": "2019-06-29T01:20:59Z"
+            },
+            "Version": "0"
+        }
+    }
+}
