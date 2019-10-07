@@ -2,6 +2,8 @@ import numpy as np
 from sklearn import metrics
 import plotly.graph_objects as go
 
+from utils import plot
+
 def idx_item(seq):
     item2idx = {}
     idx2item = []
@@ -73,24 +75,6 @@ def debug_evluation(seq, item2idx, transition_prob, n=2):
             y.append(0)
     print(y)
 
-def plot_score_seq(fig, scores, name):
-    fig.add_trace(go.Scatter(
-        x=list(range(len(scores))),
-        y=scores,
-        mode = 'lines',
-        name=name
-    ))
-
-def plot_roc(fpr, tpr, thresholds):
-    fig = go.Figure()
-    fig.add_trace(go.Scatter(
-        x=fpr,
-        y=tpr,
-        mode='lines+markers',
-        name='roc'
-    ))
-    fig.show()
-
 def statis_file(item2idx, data):
     cnt = 0
     for path in data:
@@ -142,10 +126,9 @@ if __name__ == "__main__":
     #     score = evluation(seq, item2idx, transition_prob)
     #     y_true.append(0)
     #     y_score.append(score)
-    fpr, tpr, thresholds = metrics.roc_curve(y_true, y_score)
-    roc_auc =metrics.auc(fpr, tpr)
-    print('AUC: %f' % roc_auc)
-    plot_roc(fpr, tpr, thresholds)
+    fig = go.Figure()
+    plot.plot_roc(fig, y_true, y_score)
+    fig.show()
 
     # fig = go.Figure()
     # scores = []
@@ -154,26 +137,26 @@ if __name__ == "__main__":
     #     scores.append(score)
     #     if(score < 0.2):
     #         debug_evluation(seq, item2idx, transition_prob)
-    # plot_score_seq(fig, scores, 'test')
+    # plot.plot_score(fig, scores, 'test')
     # scores = []
     # for seq in separate_seq(attack1_data):
     #     score = evluation(seq, item2idx, transition_prob)
     #     scores.append(score)
     #     if(score < 0.4):
     #         debug_evluation(seq, item2idx, transition_prob)
-    # plot_score_seq(fig, scores, 'attack1')
+    # plot.plot_score(fig, scores, 'attack1')
     # scores = []
     # for seq in separate_seq(attack2_data):
     #     score = evluation(seq, item2idx, transition_prob)
     #     scores.append(score)
     #     if(score < 0.2):
     #         debug_evluation(seq, item2idx, transition_prob)
-    # plot_score_seq(fig, scores, 'attack2')
+    # plot.plot_score(fig, scores, 'attack2')
     # scores = []
     # for seq in separate_seq(attack3_data):
     #     score = evluation(seq, item2idx, transition_prob)
     #     scores.append(score)
     #     if(score < 0.2):
     #         debug_evluation(seq, item2idx, transition_prob)
-    # plot_score_seq(fig, scores, 'attack3')
+    # plot.plot_score(fig, scores, 'attack3')
     # fig.show()

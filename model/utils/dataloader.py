@@ -1,6 +1,38 @@
-import torch
-from torch.utils.data import Dataset, DataLoader
 import numpy as np
+import torch
+from torch.utils.data import DataLoader, Dataset
+
+
+def read_data(logfile, ratio=0.8):
+    path_list = []
+    with open(logfile) as log:
+        for line in log:
+            line = line.split('|')
+            path_list.append((int(line[3]), line[5]))
+
+    train_size = int(len(path_list)*ratio)
+    return path_list[:train_size], path_list[train_size:]
+
+
+def get_file_pairs(path_list, time_window, seq_windows, batch_size):
+    path_pairs = []
+    for i in range(len(path_list)):
+        for j in range(i-1, max(-1, i-seq_windows-1), -1):
+            if(path_list[i][0] - path_list[j][0] < time_window):
+                path_pairs.append((path_list[i][1], path_list[j][1]))
+            else:
+                break
+        for j in range(i+1, min(i+seq_windows+1, len(path_list))):
+            if(path_list[j][0] - path_list[i][0] < time_window):
+                path_pairs.append((path_list[i][1], path_list[j][1]))
+            else:
+                break
+        if(len(path_pairs) >= batch_size):
+            yield np.array(path_pairs[:batch_size])
+            path_pairs = path_pairs[batch_size:]
+            print('Path read: %d/%d' % (i, len(path_list)))
+    return np.array(path_pairs)
+
 
 class File:
     def __init__(self, size, i):
@@ -17,12 +49,13 @@ class FileSystem:
         self.inodes = []
         self.size = vec_size
         self.inodes.append(File(vec_size, len(self.inodes)))
-    
+
     def addFile(self, path):
         path = path.split('\\')
         node = self.inodes[0]
         for subpath in path:
-            if subpath == '': continue
+            if subpath == '':
+                continue
             if subpath in node.files:
                 node = node.files[subpath]
             else:
@@ -36,7 +69,8 @@ class FileSystem:
         path = path.split('\\')
         node = self.inodes[0]
         for subpath in path:
-            if subpath == '': continue
+            if subpath == '':
+                continue
             if subpath in node.files:
                 node = node.files[subpath]
             else:
@@ -52,7 +86,8 @@ class FileSystem:
         idx[0] = 1
         path = path.split('\\')
         for subpath in path:
-            if subpath == '': continue
+            if subpath == '':
+                continue
             if subpath in node.files:
                 node = node.files[subpath]
                 idx = idx*node.w
@@ -66,6 +101,7 @@ class FileSystem:
 class FSDataset(Dataset):
     ''' Dataset class for read fs data
     '''
+
     def __init__(self, fs, file_path, max_time_window=30, max_seq_size=100):
         self.event_seqs = []
         self.time_seqs = []
@@ -76,14 +112,18 @@ class FSDataset(Dataset):
                 line = line.split('|')
                 i = fs.getFile(line[5]).i
                 if len(seq) == max_seq_size or \
-                  (len(seq) > 0 and int(line[3]) - int(seq[0][0]) > max_time_window):
-                    self.event_seqs.append(torch.IntTensor([int(event[1]) for event in seq]))
-                    self.time_seqs.append(torch.IntTensor([int(event[0]) for event in seq]))
+                        (len(seq) > 0 and int(line[3]) - int(seq[0][0]) > max_time_window):
+                    self.event_seqs.append(torch.IntTensor(
+                        [int(event[1]) for event in seq]))
+                    self.time_seqs.append(torch.IntTensor(
+                        [int(event[0]) for event in seq]))
                     seq.clear()
                 seq.append((line[3], i))
-            self.event_seqs.append(torch.IntTensor([int(event[1]) for event in seq]))
-            self.time_seqs.append(torch.IntTensor([int(event[0]) for event in seq]))
-        
+            self.event_seqs.append(torch.IntTensor(
+                [int(event[1]) for event in seq]))
+            self.time_seqs.append(torch.IntTensor(
+                [int(event[0]) for event in seq]))
+
     def __len__(self):
         return len(self.event_seqs)
 
@@ -99,7 +139,7 @@ def buildFS(file_path, hidden_size=100):
             fs.addFile(line[5])
     return fs
 
-    
+
 def pad_batch_fn(batch_data):
     sorted_batch = sorted(batch_data, key=lambda x: x.size(), reverse=True)
     sorted_batch = [seq.int() for seq in sorted_batch]
@@ -117,6 +157,7 @@ if __name__ == "__main__":
     fs = buildFS(train_path)
     print('Corpus size: %d' % len(fs.inodes))
     dataset = FSDataset(fs, train_path)
-    dataloader = DataLoader(dataset, batch_size=32, collate_fn=pad_batch_fn, shuffle=True)
+    dataloader = DataLoader(dataset, batch_size=32,
+                            collate_fn=pad_batch_fn, shuffle=True)
     for i, batch in enumerate(dataloader):
         print(i, batch[0].shape)
