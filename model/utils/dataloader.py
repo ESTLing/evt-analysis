@@ -1,4 +1,5 @@
 import numpy as np
+import random
 import torch
 from torch.utils.data import DataLoader, Dataset
 
@@ -8,30 +9,53 @@ def read_data(logfile, ratio=0.8):
     with open(logfile) as log:
         for line in log:
             line = line.split('|')
-            path_list.append((int(line[3]), line[5]))
+            path_list.append([int(line[3]), line[5]])
 
     train_size = int(len(path_list)*ratio)
     return path_list[:train_size], path_list[train_size:]
 
 
-def get_file_pairs(path_list, time_window, seq_windows, batch_size):
-    path_pairs = []
+def get_batch(path_list, time_window, seq_windows, batch_size, print_step=1000):
+    # path_pairs = []
+    batch = []
+    label = []
+    step = 0
     for i in range(len(path_list)):
         for j in range(i-1, max(-1, i-seq_windows-1), -1):
             if(path_list[i][0] - path_list[j][0] < time_window):
-                path_pairs.append((path_list[i][1], path_list[j][1]))
+                # path_pairs.append((path_list[i][1], path_list[j][1]))
+                batch.append(path_list[i][1])
+                label.append(path_list[j][1])
             else:
                 break
         for j in range(i+1, min(i+seq_windows+1, len(path_list))):
             if(path_list[j][0] - path_list[i][0] < time_window):
-                path_pairs.append((path_list[i][1], path_list[j][1]))
+                # path_pairs.append((path_list[i][1], path_list[j][1]))
+                batch.append(path_list[i][1])
+                label.append(path_list[j][1])
             else:
                 break
-        if(len(path_pairs) >= batch_size):
-            yield np.array(path_pairs[:batch_size])
-            path_pairs = path_pairs[batch_size:]
-            print('Path read: %d/%d' % (i, len(path_list)))
-    return np.array(path_pairs)
+        if(len(batch) >= batch_size):
+            step += 1
+            if step % print_step == 0:
+                print('Path Porcess: %d/%d' % (i, len(path_list)), end='\t')
+            # yield np.array(path_pairs[:batch_size])
+            yield np.array(batch[:batch_size]), np.array(label[:batch_size])
+            # path_pairs = path_pairs[batch_size:]
+            batch = batch[batch_size:]
+            label = label[batch_size:]
+
+    return np.array(batch), np.array(label)
+
+
+def get_neg_data(unigram_table, num, batch_size, batch):
+    neg = np.zeros((num))
+    for i in range(batch_size):
+        delta = random.sample(unigram_table, num)
+        while batch[i] in delta:
+            delta = random.sample(unigram_table, num)
+        neg = np.vstack([neg, delta])
+    return neg[1:batch_size+1]
 
 
 class File:

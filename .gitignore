@@ -6,6 +6,7 @@
 intermediate/
 siemens_data/
 evtx-data/
+model/runs
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
